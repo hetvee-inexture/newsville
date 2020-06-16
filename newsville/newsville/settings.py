@@ -25,7 +25,7 @@ SECRET_KEY = '4*svtj6rkg@go4bki^y$5eq8d+w@sn0u_gxy_+!trf3p5%@z8t'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'newsville-staging.herokuapp.com']
 
 
 # Application definition
