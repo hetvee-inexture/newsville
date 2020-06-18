@@ -20,4 +20,6 @@ def hello(request):
 
     return render(request, 'users/temp.html')
 
+def profile(request):
+    return render(request, 'users/profile.html')
 
