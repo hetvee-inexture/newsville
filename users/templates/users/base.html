@@ -22,14 +22,17 @@
 	<header class="site-header">
 	  	<nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
 		    <div class="container">
-		      <a class="navbar-brand mr-4" href="{% url 'hello' %}">Newsville</a>
+		      <a class="navbar-brand mr-4" href="{% url 'headlines' %}">Newsville</a>
 		      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
 		      <span class="navbar-toggler-icon"></span>
 		      </button>
 		      <div class="collapse navbar-collapse" id="navbarToggle">
 		        <div class="navbar-nav mr-auto">
-		          <a class="nav-item nav-link" href="{% url 'hello' %}">Home</a>
-		          <a class="nav-item nav-link" href="{% url 'hello' %}">About</a>
+		          <a class="nav-item nav-link" href="{% url 'headlines' %}">Home</a>
+				  <a class="nav-item nav-link" href="{% url 'state-news' %}">State news</a>
+				  <a class="nav-item nav-link" href="{% url 'country-news' %}">Country news</a>
+				  <a class="nav-item nav-link" href="{% url 'political-news' %}">Political news</a>
+				  <a class="nav-item nav-link" href="{% url 'sports-news' %}">Sports news</a>
 		        </div>
 		        <!-- Navbar Right Side -->
 		        <div class="navbar-nav">

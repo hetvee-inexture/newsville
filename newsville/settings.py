@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['127.0.0.1', 'newsville-staging.herokuapp.com']
 
 INSTALLED_APPS = [
     'users.apps.UsersConfig',
+    'news.apps.NewsConfig',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
