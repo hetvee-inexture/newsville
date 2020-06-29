@@ -1,8 +1,13 @@
 from django.shortcuts import render,redirect
-
+from scrapy.crawler import CrawlerRunner
+from scrapy.utils.project import get_project_settings
+import os
 
 def headlines(request):
-
+    os.environ.setdefault("SCRAPY_SETTINGS_MODULE", "home/hetvee/Desktop/Hetvee/newsville/news_scraper/news_scraper/settings.py")
+    crawler_settings = get_project_settings()
+    crawler = CrawlerRunner(crawler_settings)
+    crawler.crawl(NewsSpider)
     return render(request, 'news/headlines.html')
 
 def state_news(request):
