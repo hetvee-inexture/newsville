@@ -1,5 +1,4 @@
 from django.shortcuts import render,redirect
-from scrapy.crawler import CrawlerRunner
 from news.models import LatestNews
 
 def headlines(request):
