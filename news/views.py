@@ -1,30 +1,29 @@
 from django.shortcuts import render,redirect
+from scrapy.crawler import CrawlerRunner
+from news.models import LatestNews
 
 def headlines(request):
-
-    return render(request, 'news/headlines.html')
-
-
+    # news_obj = LatestNews.objects.all()
+    # context = {
+    #     'headlines': news_obj.headlines,
+    #     'content': news_obj.content,
+    #     'date': news_obj.date
+    # }
+    return render(request, 'news/headlines.html', context)
 
 def state_news(request):
 
 
     return render(request, 'news/state_news.html')
 
-
-
 def country_news(request):
 
 
     return render(request, 'news/country_news.html')
 
-
-
 def sports_news(request):
 
     return render(request, 'news/sports_news.html')
-
-
 
 def political_news(request):
      

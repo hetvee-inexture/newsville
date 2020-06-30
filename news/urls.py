@@ -6,5 +6,5 @@ urlpatterns = [
     path('state-news/',state_news,name='state-news'),
     path('country-news/', country_news, name='country-news'),
     path('political-news/', political_news, name='political-news'),
-    path('sports-news/', sports_news, name='sports-news')
+    path('sports-news/', sports_news, name='sports-news'),
 ]
