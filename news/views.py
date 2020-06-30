@@ -8,7 +8,7 @@ def headlines(request):
     #     'content': news_obj.content,
     #     'date': news_obj.date
     # }
-    return render(request, 'news/headlines.html', context)
+    return render(request, 'news/headlines.html')
 
 def state_news(request):
 
