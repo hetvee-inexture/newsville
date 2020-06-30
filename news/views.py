@@ -1,14 +1,15 @@
 from django.shortcuts import render,redirect
 from scrapy.crawler import CrawlerRunner
-from scrapy.utils.project import get_project_settings
-import os
+from news.models import LatestNews
 
 def headlines(request):
-    os.environ.setdefault("SCRAPY_SETTINGS_MODULE", "home/hetvee/Desktop/Hetvee/newsville/news_scraper/news_scraper/settings.py")
-    crawler_settings = get_project_settings()
-    crawler = CrawlerRunner(crawler_settings)
-    crawler.crawl(NewsSpider)
-    return render(request, 'news/headlines.html')
+    # news_obj = LatestNews.objects.all()
+    # context = {
+    #     'headlines': news_obj.headlines,
+    #     'content': news_obj.content,
+    #     'date': news_obj.date
+    # }
+    return render(request, 'news/headlines.html', context)
 
 def state_news(request):
 
