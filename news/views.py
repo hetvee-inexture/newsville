@@ -2,13 +2,14 @@ from django.shortcuts import render,redirect
 from news.models import LatestNews
 
 def headlines(request):
-    # news_obj = LatestNews.objects.all()
-    # context = {
-    #     'headlines': news_obj.headlines,
-    #     'content': news_obj.content,
-    #     'date': news_obj.date
-    # }
-    return render(request, 'news/headlines.html')
+
+    context = {
+        'latest_news': LatestNews.objects.all()
+    }
+
+    print(context['latest_news'][0].latest_content)
+ 
+    return render(request, 'news/headlines.html',context)
 
 def state_news(request):
 
