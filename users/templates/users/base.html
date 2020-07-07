@@ -10,7 +10,13 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <link rel="stylesheet" type="text/css" href="{% static 'users/main.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'users/main.css' %}">
+	<style>
+
+		body{
+			background-color: #E5E7E7;
+		}
+	</style>
 
     {% if title %}
 		<title>Newsville - {{ title }}</title>
@@ -29,10 +35,10 @@
 		      <div class="collapse navbar-collapse" id="navbarToggle">
 		        <div class="navbar-nav mr-auto">
 		          <a class="nav-item nav-link" href="{% url 'headlines' %}">Home</a>
-				  <a class="nav-item nav-link" href="{% url 'state-news' %}">State news</a>
-				  <a class="nav-item nav-link" href="{% url 'country-news' %}">Country news</a>
-				  <a class="nav-item nav-link" href="{% url 'political-news' %}">Political news</a>
-				  <a class="nav-item nav-link" href="{% url 'sports-news' %}">Sports news</a>
+				  <a class="nav-item nav-link" href="{% url 'state-news' %}">State</a>
+				  <a class="nav-item nav-link" href="{% url 'country-news' %}">Country</a>
+				  <a class="nav-item nav-link" href="{% url 'world-news' %}">World</a>
+				  <a class="nav-item nav-link" href="{% url 'sports-news' %}">Cricket</a>
 		        </div>
 		        <!-- Navbar Right Side -->
 		        <div class="navbar-nav">
@@ -50,7 +56,7 @@
 	</header>
 	<main role="main" class="container">
 	  	<div class="row">
-		    <div class="col-md-8">
+		    <div class="col-md-12">
 		      {% if messages %}
 		      	{% for message in messages %}
 		      		<div class="alert alert-success">
