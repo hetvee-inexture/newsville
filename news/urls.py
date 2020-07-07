@@ -1,5 +1,7 @@
 from django.urls import path, include
-from .views import (headlines, state_news, country_news, world_news, cricket_news)
+from .views import (headlines, state_news, 
+                    country_news, world_news, 
+                    cricket_news,ent_news)
 
 urlpatterns = [
     path('', headlines,name='headlines'),
@@ -7,4 +9,5 @@ urlpatterns = [
     path('country-news/', country_news, name='country-news'),
     path('world-news/', world_news, name='world-news'),
     path('sports-news/', cricket_news, name='sports-news'),
+    path('ent-news/', ent_news, name='ent-news'),
 ]
