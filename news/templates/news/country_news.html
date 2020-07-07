@@ -1,7 +1,18 @@
 {% extends "users/base.html" %}
 {% block content %}
 
-    <div class="content-section">
-        <fieldset>Country news</fieldset>
+<div class="content-section text-center">
+    <strong>Country News</strong>
+</div>
+
+{% for news in country_news %}
+
+<div class="card m-2" style="width: 350px; display: inline-block;">
+    <img class="card-img-top" src="{{ news.country_image_url }}" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{ news.country_headlines }}</h5>
+      <p class="card-text">{{ news.country_content }}</p>
     </div>
+</div>
+{% endfor %}
 {% endblock content %}
