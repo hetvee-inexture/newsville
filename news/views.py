@@ -1,12 +1,14 @@
 from django.shortcuts import render,redirect
-from news.models import LatestNews,CountryNews, CricketNews, WorldNews, StateNews, StateOneliners
+from news.models import (LatestNews,CountryNews,
+                        CricketNews, WorldNews, 
+                        StateNews, StateOneliners,
+                        EntNews,EntOneliners)
 
 def headlines(request):
 
     context = {
         'latest_news': LatestNews.objects.all()
     }
-
     return render(request, 'news/headlines.html',context)
 
 def state_news(request):
@@ -46,5 +48,14 @@ def state_news(request):
     }
      
     return render(request, 'news/state_news.html',context)
+
+def ent_news(request):
+
+    context = {
+        'ent_news': EntNews.objects.all(),
+        'ent_oneliners': EntOneliners.objects.all()
+    } 
+
+    return render(request, 'news/ent_news.html',context)
 
 
