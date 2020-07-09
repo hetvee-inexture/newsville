@@ -79,8 +79,12 @@ WSGI_APPLICATION = 'newsville.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd4v4uejl95sqgs',
+        'USER': 'gypdghksynykyl',
+        'PASSWORD': '82378f6ba7f337ef321174152b45af6f6f927ec33f881ec42149980f14672eea',
+        'HOST': 'ec2-107-22-7-9.compute-1.amazonaws.com',
+        'PORT': 5432,
     }
 }
 

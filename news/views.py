@@ -9,7 +9,6 @@ def headlines(request):
     context = {
         'latest_news': LatestNews.objects.all()
     }
-
     return render(request, 'news/headlines.html',context)
 
 def state_news(request):
