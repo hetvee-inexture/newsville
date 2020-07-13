@@ -3,6 +3,8 @@ from news.models import (LatestNews,CountryNews,
                         CricketNews, WorldNews, 
                         StateNews, StateOneliners,
                         EntNews,EntOneliners)
+from django.contrib.auth.decorators import login_required
+
 
 def headlines(request):
 
@@ -11,11 +13,20 @@ def headlines(request):
     }
     return render(request, 'news/headlines.html',context)
 
+@login_required
+def content(request):
+    context = {
+        'latest_news': LatestNews.objects.all()
+    }
+
+    return render(request, 'news/home.html',context)
+
+@login_required
 def state_news(request):
 
-
     return render(request, 'news/state_news.html')
-
+    
+@login_required
 def country_news(request):
 
     context = {
@@ -24,6 +35,7 @@ def country_news(request):
 
     return render(request, 'news/country_news.html',context)
 
+@login_required
 def cricket_news(request):
 
     context = {
@@ -32,6 +44,7 @@ def cricket_news(request):
 
     return render(request, 'news/sports_news.html',context)
 
+@login_required
 def world_news(request):
 
     context = {
@@ -40,6 +53,7 @@ def world_news(request):
      
     return render(request, 'news/world_news.html',context)
 
+@login_required
 def state_news(request):
 
     context = {
@@ -49,6 +63,7 @@ def state_news(request):
      
     return render(request, 'news/state_news.html',context)
 
+@login_required
 def ent_news(request):
 
     context = {
