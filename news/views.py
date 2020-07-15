@@ -4,6 +4,7 @@ from news.models import (LatestNews,CountryNews,
                         StateNews, StateOneliners,
                         EntNews,EntOneliners)
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 
 def headlines(request):
@@ -69,4 +70,19 @@ def ent_news(request):
 
     return render(request, 'news/ent_news.html',context)
 
+def headlines_search(request):
+    headlines = LatestNews.objects.all()
+    query = request.GET.get('q')
+    if query:
+        headlines = LatestNews.objects.filter(
+            Q(latest_headlines__search=query)
+        )
 
+    context = {
+        'search_filter': headlines
+    }
+
+
+    print(context)
+    return render(request, 'news/search.html',context)
+    
