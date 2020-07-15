@@ -49,7 +49,15 @@
 					<a class="nav-item nav-link" href="{% url 'sports-news' %}">Cricket</a>
 					<a class="nav-item nav-link" href="{% url 'ent-news' %}">Entertainment</a>
 				{% endif %}
-		        </div>
+				</div>
+				<div class="navbar-nav mr-auto">
+					<ul class="navbar-nav mr-auto">
+						<form class="form-inline my-2 my-lg-0" action="{% url 'search' %}">
+							<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+							<button class="btn btn-outline-success my-2 my-sm-2" type="submit">Search</button>
+						</form>
+					</ul>
+				</div>
 		        <!-- Navbar Right Side -->
 		        <div class="navbar-nav">
 		        	{% if user.is_authenticated %}

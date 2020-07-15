@@ -1,0 +1,9 @@
+{% extends "users/base.html" %}
+
+{% block content %}
+
+    {% for search in search_filter %}
+       <h3>{{ search }}</h3>
+    {% endfor %}
+
+{% endblock content %}
