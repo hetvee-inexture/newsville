@@ -21,10 +21,6 @@ def content(request):
 
     return render(request, 'news/home.html',context)
 
-@login_required
-def state_news(request):
-
-    return render(request, 'news/state_news.html')
     
 @login_required
 def country_news(request):
