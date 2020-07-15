@@ -1,0 +1,24 @@
+{% extends "users/base.html" %}
+{% block content %}
+
+<div class="content-section text-center">
+    <strong>State News</strong>
+</div>
+
+{% for news in state_news %}
+<h2>{{ news.state_name }}</h2>
+<div class="card m-2" style="width: 350px; display: inline-block;">
+    <img class="card-img-top" src="{{ news.state_image_url }}" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{ news.state_lead_text }}</h5>
+      {% for one_liner in state_oneliners %}
+        {% if one_liner.state_id_id == news.id %}
+
+         <p class="card-text">{{ one_liner.one_liners }}</p>
+        {% endif %}
+      {% endfor %} 
+
+    </div>
+</div>
+{% endfor %}
+{% endblock content %}
