@@ -74,6 +74,108 @@ class EntOneliners(models.Model):
     one_liners = models.TextField()
     ent_id = models.ForeignKey(EntNews,on_delete=models.CASCADE)
 
-
     def __str__(self):
         return self.one_liners
+
+class NdtvlatestNews(models.Model):
+
+    latest_headlines = models.TextField()
+    latest_content = models.TextField()
+    latest_image_url = models.TextField()
+
+    def __str__(self):
+        return self.latest_headlines
+
+class NdtvCityNews(models.Model):
+
+    city_headlines = models.TextField()
+    city_content = models.TextField()
+    city_image_url = models.TextField()
+
+    def __str__(self):
+        return self.city_headlines
+
+class NdtvCountryNews(models.Model):
+
+    country_headlines = models.TextField()
+    country_content = models.TextField()
+    country_image_url = models.TextField()
+
+    def __str__(self):
+        return self.country_headlines
+
+class NdtvWorldNews(models.Model):
+
+    world_headlines = models.TextField()
+    world_content = models.TextField()
+    world_image_url = models.TextField()
+
+    def __str__(self):
+        return self.world_headlines
+
+class NdtvCricketNews(models.Model):
+
+    cricket_headlines = models.TextField()
+    cricket_content = models.TextField()
+    cricket_image_url = models.TextField()
+
+    def __str__(self):
+        return self.cricket_headlines
+
+class NdtvEntNews(models.Model):
+
+    ent_headlines = models.TextField()
+    ent_content = models.TextField()
+    ent_image_url = models.TextField()
+
+    def __str__(self):
+        return self.ent_headlines
+
+class ScrollLatestNews(models.Model):
+
+    latest_headlines = models.TextField()
+    latest_content = models.TextField()
+    latest_image_url = models.TextField()
+
+class ScrollWorldNews(models.Model):
+
+    world_headlines = models.TextField()
+    world_content = models.TextField()
+    world_image_url = models.TextField()
+
+    def __str__(self):
+        return self.world_headlines
+
+class ScrollCountryNews(models.Model):
+
+    country_headlines = models.TextField()
+    country_content = models.TextField()
+    country_image_url = models.TextField()
+
+    def __str__(self):
+        return self.country_headlines
+
+class ScrollEntNews(models.Model):
+
+    ent_headlines = models.TextField()
+    ent_content = models.TextField()
+    ent_image_url = models.TextField()
+
+    def __str__(self):
+        return self.ent_headlines
+
+class ScrollCricketNews(models.Model):
+
+    cricket_headlines = models.TextField()
+    cricket_image_url = models.TextField()
+
+    def __str__(self):
+        return self.cricket_headlines
+
+class ScrollCityNews(models.Model):
+
+    city_headlines = models.TextField()
+    city_image_url = models.TextField()
+
+    def __str__(self):
+        return self.city_headlines

@@ -7,15 +7,19 @@
     </div>
 
     {% for news in latest_news %}
-
+        
     <div class="card m-2" style="width: 350px; display: inline-block;">
         <img class="card-img-top" src="{{ news.latest_image_url }}" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title">{{ news.latest_headlines }}</h5>
         </div>
+        {% if request.user.is_superuser %}
+            <button>Add tags</button>
+        {% else %}
+            <small>Tags...</small>
+        {% endif %}
     </div>
+    
     {% endfor %}
-
- 
 
 {% endblock content %}
