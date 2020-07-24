@@ -10,12 +10,12 @@
 <div class="card m-2" style="width: 350px; display: inline-block;">
     <img class="card-img-top" src="{{ news.ent_image_url }}" alt="Card image cap">
     <div class="card-body">
-      <h5 class="card-title">{{ news.ent_lead_text }}</h5>
-      {% for one_liner in ent_oneliners %}
-        {% if one_liner.ent_id_id == news.id %}
-         <p class="card-text">{{ one_liner.one_liners }}</p>
-        {% endif %}
-      {% endfor %} 
+      <h5 class="card-title">{{ news.ent_headlines }}</h5>
+      <!-- {% for one_liner in ent_oneliners %} -->
+        <!-- {% if one_liner.ent_id_id == news.id %} -->
+      <p class="card-text">{{ news.ent_content }}</p>
+        <!-- {% endif %} -->
+      <!-- {% endfor %}  -->
 
     </div>
 </div>

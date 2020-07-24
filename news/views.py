@@ -2,22 +2,28 @@ from django.shortcuts import render,redirect
 from news.models import (LatestNews,CountryNews,
                         CricketNews, WorldNews, 
                         StateNews, StateOneliners,
-                        EntNews,EntOneliners)
+                        EntNews,EntOneliners, NdtvlatestNews,
+                        NdtvCountryNews,NdtvWorldNews,
+                        NdtvCricketNews,NdtvEntNews,
+                        ScrollLatestNews,ScrollCityNews,
+                        ScrollCountryNews,ScrollCricketNews,
+                        ScrollEntNews,ScrollWorldNews)
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 
 
 def headlines(request):
 
+
     context = {
-        'latest_news': LatestNews.objects.all()
+        'latest_news': ScrollLatestNews.objects.all()
     }
     return render(request, 'news/headlines.html',context)
 
 @login_required
 def content(request):
     context = {
-        'latest_news': LatestNews.objects.all()
+        'latest_news': ScrollLatestNews.objects.all()
     }
 
     return render(request, 'news/home.html',context)
@@ -27,7 +33,7 @@ def content(request):
 def country_news(request):
 
     context = {
-        'country_news': CountryNews.objects.all()
+        'country_news': ScrollCountryNews.objects.all()
     }
 
     return render(request, 'news/country_news.html',context)
@@ -36,7 +42,7 @@ def country_news(request):
 def cricket_news(request):
 
     context = {
-        'cricket_news': CricketNews.objects.all()
+        'cricket_news': ScrollCricketNews.objects.all()
     }
 
     return render(request, 'news/sports_news.html',context)
@@ -45,7 +51,7 @@ def cricket_news(request):
 def world_news(request):
 
     context = {
-        'world_news': WorldNews.objects.all()
+        'world_news': ScrollWorldNews.objects.all()
     }
      
     return render(request, 'news/world_news.html',context)
@@ -63,10 +69,13 @@ def state_news(request):
 @login_required
 def ent_news(request):
 
+    # context = {
+    #     'ent_news': EntNews.objects.all(),
+    #     'ent_oneliners': EntOneliners.objects.all()
+    # } 
     context = {
-        'ent_news': EntNews.objects.all(),
-        'ent_oneliners': EntOneliners.objects.all()
-    } 
+        'ent_news': ScrollEntNews.objects.all()
+    }
 
     return render(request, 'news/ent_news.html',context)
 
