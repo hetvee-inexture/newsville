@@ -179,15 +179,17 @@ class ScrollCityNews(models.Model):
     def __str__(self):
         return self.city_headlines
 
-# class Tags(models.Model):
+class Tags(models.Model):
 
-#     tags = [
-#         ('trending','Trending'),
-#         ('latest', 'Latest'),
-#         ('cricket', 'Cricket'),
-#         ('entertaining', 'Entertaining'),
-#         ('rip', 'RIP'),
-#         ('india', 'India')
-#     ]
+    tags = [
+        ('trending','Trending'),
+        ('latest', 'Latest'),
+        ('cricket', 'Cricket'),
+        ('entertaining', 'Entertaining'),
+        ('rip', 'RIP'),
+        ('india', 'India')
+    ]
 
-#     tag_name = models.CharField(max_length=100,choices=tags)
+    tag_name = models.CharField(max_length=100,choices=tags)
+    news_id = models.IntegerField()
+    news_web = models.CharField(max_length=100)

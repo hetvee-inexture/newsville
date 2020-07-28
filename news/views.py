@@ -11,7 +11,6 @@ from news.models import (LatestNews,CountryNews,
                         NdtvCityNews)
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from news.forms import Choices
 global TYPE
 
 def home(request):
@@ -19,6 +18,8 @@ def home(request):
     return render(request, 'news/home.html')
 
 def headlines(request):
+
+    print(url_param)
 
     if request.GET.get('ndtv'):
 
@@ -157,7 +158,5 @@ def headlines_search(request):
         'search_filter': headlines
     }
 
-
-    print(context)
     return render(request, 'news/search.html',context)
     
