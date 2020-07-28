@@ -190,6 +190,6 @@ class Tags(models.Model):
         ('india', 'India')
     ]
 
-    tag_name = models.CharField(max_length=100,choices=tags)
+    tags = models.CharField(max_length=100,choices=tags)
     news_id = models.IntegerField()
     news_web = models.CharField(max_length=100)

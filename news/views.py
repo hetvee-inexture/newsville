@@ -11,7 +11,7 @@ from news.models import (LatestNews,CountryNews,
                         NdtvCityNews)
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-global TYPE
+from news.forms import TagForm
 
 def home(request):
 
@@ -19,22 +19,26 @@ def home(request):
 
 def headlines(request):
 
-    print(url_param)
+    if request.method == 'POST':
+        form = TagForm()
 
     if request.GET.get('ndtv'):
 
         context = {
-            'latest_news': NdtvlatestNews.objects.all()
+            'latest_news': NdtvlatestNews.objects.all(),
+            'form' : TagForm
         }
     
     elif request.GET.get('zee'):
         context = {
-            'latest_news': LatestNews.objects.all()
+            'latest_news': LatestNews.objects.all(),
+            'form': form
         }
 
     else:
         context = {
-            'latest_news': ScrollLatestNews.objects.all()
+            'latest_news': ScrollLatestNews.objects.all(),
+            'form': form
         }
     
     return render(request, 'news/headlines.html',context)
