@@ -7,64 +7,126 @@ from news.models import (LatestNews,CountryNews,
                         NdtvCricketNews,NdtvEntNews,
                         ScrollLatestNews,ScrollCityNews,
                         ScrollCountryNews,ScrollCricketNews,
-                        ScrollEntNews,ScrollWorldNews)
+                        ScrollEntNews,ScrollWorldNews,
+                        NdtvCityNews)
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from news.forms import Choices
+global TYPE
 
+def home(request):
+
+    return render(request, 'news/home.html')
 
 def headlines(request):
+    global TYPE
 
+    if request.GET.get('ndtv'):
 
-    context = {
-        'latest_news': ScrollLatestNews.objects.all()
-    }
-    return render(request, 'news/headlines.html',context)
+        context = {
+            'latest_news': NdtvlatestNews.objects.all()
+        }
+        TYPE = 'NDTV'
+        return render(request, 'news/headlines.html',context)
+    
+    if request.GET.get('zee'):
+        context = {
+            'latest_news': LatestNews.objects.all()
+        }
+        TYPE = 'ZEE'
+        return render(request, 'news/headlines.html',context)
 
-@login_required
-def content(request):
-    context = {
-        'latest_news': ScrollLatestNews.objects.all()
-    }
+    if request.GET.get('scroll'):
+        context = {
+            'latest_news': ScrollLatestNews.objects.all()
+        }
+        TYPE = 'SCROLL'
+        return render(request, 'news/headlines.html',context)
 
-    return render(request, 'news/home.html',context)
 
     
 @login_required
 def country_news(request):
+    global TYPE
 
-    context = {
-        'country_news': ScrollCountryNews.objects.all()
-    }
+    if TYPE == 'NDTV':
 
-    return render(request, 'news/country_news.html',context)
+        context = {
+            'country_news': NdtvCountryNews.objects.all()
+        }
+
+        return render(request, 'news/country_news.html',context)
+
+    if TYPE == 'ZEE':
+        
+        context = {
+            'country_news': CountryNews.objects.all()
+        }
+
+        return render(request, 'news/country_news.html',context)
+    else:
+        print(TYPE)
+        context = {
+            'country_news': ScrollCountryNews.objects.all()
+        }
+
+        return render(request, 'news/country_news.html',context)
 
 @login_required
 def cricket_news(request):
+    global TYPE
+    if TYPE == 'NDTV':    
+        context = {
+            'cricket_news': NdtvCricketNews.objects.all()
+        }
 
-    context = {
-        'cricket_news': ScrollCricketNews.objects.all()
-    }
+        return render(request, 'news/sports_news.html',context)
+    elif TYPE =='ZEE':
+        context = {
+            'cricket_news': CricketNews.objects.all()
+        }
 
-    return render(request, 'news/sports_news.html',context)
+        return render(request, 'news/sports_news.html',context)
+    else:
+        context = {
+            'cricket_news': ScrollCricketNews.objects.all()
+        }
+
+        return render(request, 'news/sports_news.html',context)
 
 @login_required
 def world_news(request):
-
-    context = {
-        'world_news': ScrollWorldNews.objects.all()
-    }
-     
-    return render(request, 'news/world_news.html',context)
+    global TYPE
+    if TYPE == 'NDTV':
+        print(TYPE)
+        context = {
+            'world_news': NdtvWorldNews.objects.all()
+        }
+        
+        return render(request, 'news/world_news.html',context)
 
 @login_required
 def state_news(request):
 
-    context = {
-        'state_news': StateNews.objects.all(),
-        'state_oneliners': StateOneliners.objects.all()
-    }
-     
+    if TYPE == 'ZEE':
+
+        context = {
+            'state_news': StateNews.objects.all(),
+            'state_oneliners': StateOneliners.objects.all()
+        }
+
+    elif TYPE == 'NDTV':
+        context = {
+            'city': True,
+            'city_news': NdtvCityNews.objects.all()
+        }
+    else:
+        context = {
+            'city': True,
+            'city_news' : ScrollCityNews.objects.all()
+        }    
     return render(request, 'news/state_news.html',context)
+    
 
 @login_required
 def ent_news(request):

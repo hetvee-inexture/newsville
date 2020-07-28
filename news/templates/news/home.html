@@ -2,11 +2,18 @@
 
 {% block content %}
 
-    <div class="content-section text-center">
-        <strong>Headlines</strong>
-    </div>
+    {% if user.is_superuser %}
+        <form action="{% url 'headlines' %}">
 
-    {% for news in latest_news %}
+            <input type="submit" value="NDTV" name="ndtv">
+            <input type="submit" value="ZEE" name="zee">
+            <input type="submit" value="Scroll" name="scroll">
+        </form>
+    {% else %}
+        Welcome!!
+    {% endif %}
+
+    <!-- {% for news in latest_news %}
 
     <div class="card m-2" style="width: 350px; display: inline-block;">
         <img class="card-img-top" src="{{ news.latest_image_url }}" alt="Card image cap">
@@ -15,7 +22,7 @@
           <p class="card-text">{{ news.latest_content }}</p>
         </div>
     </div>
-    {% endfor %}
+    {% endfor %} -->
 
  
 
