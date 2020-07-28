@@ -19,103 +19,98 @@ def home(request):
     return render(request, 'news/home.html')
 
 def headlines(request):
-    global TYPE
 
     if request.GET.get('ndtv'):
 
         context = {
             'latest_news': NdtvlatestNews.objects.all()
         }
-        TYPE = 'NDTV'
-        return render(request, 'news/headlines.html',context)
     
-    if request.GET.get('zee'):
+    elif request.GET.get('zee'):
         context = {
             'latest_news': LatestNews.objects.all()
         }
-        TYPE = 'ZEE'
-        return render(request, 'news/headlines.html',context)
 
-    if request.GET.get('scroll'):
+    else:
         context = {
             'latest_news': ScrollLatestNews.objects.all()
         }
-        TYPE = 'SCROLL'
-        return render(request, 'news/headlines.html',context)
-
-
     
+    return render(request, 'news/headlines.html',context)
+     
 @login_required
 def country_news(request):
-    global TYPE
 
-    if TYPE == 'NDTV':
+    if request.GET.get('ndtv'):
 
         context = {
             'country_news': NdtvCountryNews.objects.all()
         }
 
-        return render(request, 'news/country_news.html',context)
-
-    if TYPE == 'ZEE':
+    elif request.GET.get('zee'):
         
         context = {
             'country_news': CountryNews.objects.all()
         }
 
-        return render(request, 'news/country_news.html',context)
-    else:
-        print(TYPE)
+    else: 
         context = {
             'country_news': ScrollCountryNews.objects.all()
         }
 
-        return render(request, 'news/country_news.html',context)
+    return render(request, 'news/country_news.html',context)
 
 @login_required
 def cricket_news(request):
-    global TYPE
-    if TYPE == 'NDTV':    
+
+    if request.GET.get('ndtv'):    
         context = {
             'cricket_news': NdtvCricketNews.objects.all()
         }
 
-        return render(request, 'news/sports_news.html',context)
-    elif TYPE =='ZEE':
+    elif request.GET.get('zee'):
         context = {
             'cricket_news': CricketNews.objects.all()
         }
 
-        return render(request, 'news/sports_news.html',context)
     else:
         context = {
             'cricket_news': ScrollCricketNews.objects.all()
         }
 
-        return render(request, 'news/sports_news.html',context)
+    return render(request, 'news/sports_news.html',context)
 
 @login_required
 def world_news(request):
-    global TYPE
-    if TYPE == 'NDTV':
-        print(TYPE)
+
+    if request.GET.get('ndtv'):
         context = {
             'world_news': NdtvWorldNews.objects.all()
         }
         
-        return render(request, 'news/world_news.html',context)
+    elif request.GET.get('zee'):
+        context = {
+            'world_news': WorldNews.objects.all()
+        }
+
+    else:
+        context = {
+            'world_news': ScrollWorldNews.objects.all()
+        }
+
+    return render(request, 'news/world_news.html',context)  
 
 @login_required
 def state_news(request):
 
-    if TYPE == 'ZEE':
+    if request.GET.get('zee'):
 
         context = {
             'state_news': StateNews.objects.all(),
             'state_oneliners': StateOneliners.objects.all()
         }
 
-    elif TYPE == 'NDTV':
+    elif request.GET.get('ndtv'):
         context = {
             'city': True,
             'city_news': NdtvCityNews.objects.all()
@@ -131,13 +126,22 @@ def state_news(request):
 @login_required
 def ent_news(request):
 
-    # context = {
-    #     'ent_news': EntNews.objects.all(),
-    #     'ent_oneliners': EntOneliners.objects.all()
-    # } 
-    context = {
-        'ent_news': ScrollEntNews.objects.all()
-    }
+    if request.GET.get('zee'):
+
+        context = {
+            'ent_news_one': EntNews.objects.all(),
+            'ent_oneliners': EntOneliners.objects.all()
+        } 
+    elif request.GET.get('ndtv'):
+        context = {
+            'ent': 'ent',
+            'ent_news': NdtvEntNews.objects.all()
+        }
+    else:
+        context = {
+            'ent' : 'ent',
+            'ent_news': ScrollEntNews.objects.all()
+        }
 
     return render(request, 'news/ent_news.html',context)
 

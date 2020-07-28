@@ -5,7 +5,7 @@ from .views import (headlines, state_news,
 
 urlpatterns = [
     path('', home,name='home'),
-     path('headlines', headlines,name='headlines'),
+    path('headlines', headlines,name='headlines'),
     path('state-news/',state_news,name='state-news'),
     path('country-news/', country_news, name='country-news'),
     path('world-news/', world_news, name='world-news'),

@@ -3,12 +3,49 @@
 {% block content %}
 
     {% if user.is_superuser %}
+        <h2>Headlines</h2>
         <form action="{% url 'headlines' %}">
 
             <input type="submit" value="NDTV" name="ndtv">
             <input type="submit" value="ZEE" name="zee">
             <input type="submit" value="Scroll" name="scroll">
         </form>
+        <h2>State</h2>
+        <form action="{% url 'state-news' %}">
+
+            <input type="submit" value="NDTV" name="ndtv">
+            <input type="submit" value="ZEE" name="zee">
+            <input type="submit" value="Scroll" name="scroll">
+        </form>
+        <h2>Country</h2>
+        <form action="{% url 'country-news' %}">
+
+            <input type="submit" value="NDTV" name="ndtv">
+            <input type="submit" value="ZEE" name="zee">
+            <input type="submit" value="Scroll" name="scroll">
+        </form>
+        <h2>World</h2>
+        <form action="{% url 'world-news' %}">
+
+            <input type="submit" value="NDTV" name="ndtv">
+            <input type="submit" value="ZEE" name="zee">
+            <input type="submit" value="Scroll" name="scroll">
+        </form>
+        <h2>Cricket</h2>
+        <form action="{% url 'sports-news' %}">
+
+            <input type="submit" value="NDTV" name="ndtv">
+            <input type="submit" value="ZEE" name="zee">
+            <input type="submit" value="Scroll" name="scroll">
+        </form>
+        <h2>Entertainment</h2>
+        <form action="{% url 'ent-news' %}">
+
+            <input type="submit" value="NDTV" name="ndtv">
+            <input type="submit" value="ZEE" name="zee">
+            <input type="submit" value="Scroll" name="scroll">
+        </form>
+        
     {% else %}
         Welcome!!
     {% endif %}
