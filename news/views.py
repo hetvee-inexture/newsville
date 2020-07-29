@@ -1,14 +1,5 @@
 from django.shortcuts import render,redirect
-from news.models import (LatestNews,CountryNews,
-                        CricketNews, WorldNews, 
-                        StateNews, StateOneliners,
-                        EntNews,EntOneliners, NdtvlatestNews,
-                        NdtvCountryNews,NdtvWorldNews,
-                        NdtvCricketNews,NdtvEntNews,
-                        ScrollLatestNews,ScrollCityNews,
-                        ScrollCountryNews,ScrollCricketNews,
-                        ScrollEntNews,ScrollWorldNews,
-                        NdtvCityNews)
+from news.models import *
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from news.forms import TagForm
@@ -19,26 +10,24 @@ def home(request):
 
 def headlines(request):
 
-    if request.method == 'POST':
-        form = TagForm()
-
+    latest_news_obj = NdtvlatestNews.objects.all()
+    tags_obj = Tags.objects.all()
     if request.GET.get('ndtv'):
 
         context = {
-            'latest_news': NdtvlatestNews.objects.all(),
-            'form' : TagForm
+            'latest_news': latest_news_obj,
+            'tags': tags_obj
         }
-    
+
+
     elif request.GET.get('zee'):
         context = {
-            'latest_news': LatestNews.objects.all(),
-            'form': form
+            'latest_news': LatestNews.objects.all(),        
         }
 
     else:
         context = {
             'latest_news': ScrollLatestNews.objects.all(),
-            'form': form
         }
     
     return render(request, 'news/headlines.html',context)

@@ -2,182 +2,68 @@ from django.db import models
 import json
 from django.utils import timezone
 
-class CountryNews(models.Model):
+class NdtvNews(models.Model):
+    ndtv_headlines = models.TextField()
+    ndtv_content = models.TextField()
+    ndtv_img_url = models.TextField()
 
-    country_headlines = models.TextField()
-    country_content = models.TextField()
-    country_image_url = models.TextField()
-    date = models.DateTimeField(default=timezone.now, null=True)
-
-
-    def __str__(self):
-        return self.country_headlines
-
-class CricketNews(models.Model):
-
-    cricket_headlines = models.TextField()
-    cricket_content = models.TextField()
-    cricket_image_url = models.TextField()
-    date = models.DateTimeField(default=timezone.now, null=True)
-
-    def __str__(self):
-        return self.cricket_headlines
-
-class LatestNews(models.Model):
-
-    latest_headlines = models.TextField()
-    latest_content = models.TextField()
-    latest_image_url = models.TextField()
-    date = models.DateTimeField(default=timezone.now, null=True)
-
-    def __str__(self):
-        return self.latest_headlines
-
-class WorldNews(models.Model):
-
-    world_headlines = models.TextField()
-    world_content = models.TextField()
-    world_image_url = models.TextField()
-    date = models.DateTimeField(default=timezone.now, null=True)
-
-    def __str__(self):
-        return self.world_headlines
-
-
-class StateNews(models.Model):
-
-    state_lead_text = models.TextField()
-    state_image_url = models.TextField()
-    state_name = models.TextField()
-
-    def __str__(self):
-        return self.state_lead_text
-
-class StateOneliners(models.Model):
-
-    one_liners = models.TextField()
-    state_id = models.ForeignKey(StateNews,on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.one_liners
-
-class EntNews(models.Model):
-    ent_lead_text = models.TextField()
-    ent_image_url = models.TextField()
-    ent_name = models.TextField()
-
-    def __str__(self):
-        return self.ent_lead_text
-
-class EntOneliners(models.Model):
-
-    one_liners = models.TextField()
-    ent_id = models.ForeignKey(EntNews,on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.one_liners
-
-class NdtvlatestNews(models.Model):
-
-    latest_headlines = models.TextField()
-    latest_content = models.TextField()
-    latest_image_url = models.TextField()
-
-    def __str__(self):
-        return self.latest_headlines
-
-class NdtvCityNews(models.Model):
-
-    city_headlines = models.TextField()
-    city_content = models.TextField()
-    city_image_url = models.TextField()
-
-    def __str__(self):
-        return self.city_headlines
-
-class NdtvCountryNews(models.Model):
-
-    country_headlines = models.TextField()
-    country_content = models.TextField()
-    country_image_url = models.TextField()
-
-    def __str__(self):
-        return self.country_headlines
+class NdtvLatestNews(models.Model):
+    news_id = models.ForeignKey(NdtvNews, on_delete=models.CASCADE)
 
 class NdtvWorldNews(models.Model):
-
-    world_headlines = models.TextField()
-    world_content = models.TextField()
-    world_image_url = models.TextField()
-
-    def __str__(self):
-        return self.world_headlines
+    news_id = models.ForeignKey(NdtvNews, on_delete=models.CASCADE)
 
 class NdtvCricketNews(models.Model):
+    news_id = models.ForeignKey(NdtvNews, on_delete=models.CASCADE)
 
-    cricket_headlines = models.TextField()
-    cricket_content = models.TextField()
-    cricket_image_url = models.TextField()
-
-    def __str__(self):
-        return self.cricket_headlines
+class NdtvCityNews(models.Model):
+    news_id = models.ForeignKey(NdtvNews, on_delete=models.CASCADE)
 
 class NdtvEntNews(models.Model):
+    news_id = models.ForeignKey(NdtvNews, on_delete=models.CASCADE)
 
-    ent_headlines = models.TextField()
-    ent_content = models.TextField()
-    ent_image_url = models.TextField()
+class NdtvCountryNews(models.Model):
+    news_id = models.ForeignKey(NdtvNews, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.ent_headlines
+class ScrollNews(models.Model):
+    scroll_headlines = models.TextField()
+    scroll_content = models.TextField()
+    scroll_img_url = models.TextField()
 
 class ScrollLatestNews(models.Model):
-
-    latest_headlines = models.TextField()
-    latest_content = models.TextField()
-    latest_image_url = models.TextField()
+    news_id = models.ForeignKey(ScrollNews, on_delete=models.CASCADE)
 
 class ScrollWorldNews(models.Model):
-
-    world_headlines = models.TextField()
-    world_content = models.TextField()
-    world_image_url = models.TextField()
-
-    def __str__(self):
-        return self.world_headlines
+    news_id = models.ForeignKey(ScrollNews, on_delete=models.CASCADE)
 
 class ScrollCountryNews(models.Model):
-
-    country_headlines = models.TextField()
-    country_content = models.TextField()
-    country_image_url = models.TextField()
-
-    def __str__(self):
-        return self.country_headlines
+    news_id = models.ForeignKey(ScrollNews, on_delete=models.CASCADE)
 
 class ScrollEntNews(models.Model):
-
-    ent_headlines = models.TextField()
-    ent_content = models.TextField()
-    ent_image_url = models.TextField()
-
-    def __str__(self):
-        return self.ent_headlines
+    news_id = models.ForeignKey(ScrollNews, on_delete=models.CASCADE)
 
 class ScrollCricketNews(models.Model):
-
-    cricket_headlines = models.TextField()
-    cricket_image_url = models.TextField()
-
-    def __str__(self):
-        return self.cricket_headlines
+    news_id = models.ForeignKey(ScrollNews, on_delete=models.CASCADE)
 
 class ScrollCityNews(models.Model):
+    news_id = models.ForeignKey(ScrollNews, on_delete=models.CASCADE)
 
-    city_headlines = models.TextField()
-    city_image_url = models.TextField()
-    def __str__(self):
-        return self.city_headlines
+class ZeeNews(models.Model):
+    zee_headlines = models.TextField()
+    zee_content = models.TextField()
+    zee_img_url = models.TextField()
+
+class ZeeCountryNews(models.Model):
+    news_id = models.ForeignKey(ZeeNews, on_delete=models.CASCADE)
+
+class ZeeCricketNews(models.Model):
+    news_id = models.ForeignKey(ZeeNews, on_delete=models.CASCADE)
+
+class ZeeLatestNews(models.Model):
+    news_id = models.ForeignKey(ZeeNews, on_delete=models.CASCADE)
+
+class ZeeWorldNews(models.Model):
+    news_id = models.ForeignKey(ZeeNews, on_delete=models.CASCADE)
 
 class Tags(models.Model):
 
@@ -187,9 +73,9 @@ class Tags(models.Model):
         ('cricket', 'Cricket'),
         ('entertaining', 'Entertaining'),
         ('rip', 'RIP'),
-        ('india', 'India')
+        ('india', 'India'),
+        ('city', 'City')
     ]
 
     tags = models.CharField(max_length=100,choices=tags)
     news_id = models.IntegerField()
-    news_web = models.CharField(max_length=100)

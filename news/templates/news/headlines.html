@@ -13,10 +13,12 @@
         <div class="card-body">
           <h5 class="card-title">{{ news.latest_headlines }}</h5>
           <p class="card-content">{{ news.latest_content}}</p>
+          <hr>
         </div>
         {% if request.user.is_superuser %}
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
+                <input type="hidden" value="{{ news.id }}" name="news_id">
                 <fieldset class="form-group">
                     {{form|crispy}}
                 </fieldset>
