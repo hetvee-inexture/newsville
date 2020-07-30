@@ -4,20 +4,31 @@
 <div class="content-section text-center">
     <strong>Entertainment News</strong>
 </div>
-
-{% for news in ent_news %}
-<h2>{{ news.state_name }}</h2>
-<div class="card m-2" style="width: 350px; display: inline-block;">
-    <img class="card-img-top" src="{{ news.ent_image_url }}" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">{{ news.ent_headlines }}</h5>
-      <!-- {% for one_liner in ent_oneliners %} -->
-        <!-- {% if one_liner.ent_id_id == news.id %} -->
-      <p class="card-text">{{ news.ent_content }}</p>
-        <!-- {% endif %} -->
-      <!-- {% endfor %}  -->
-
+{% if ent %}
+  {% for news in ent_news%}
+    <div class="card m-2" style="width: 350px; display: inline-block;">
+      <img class="card-img-top" src="{{ news.ent_image_url }}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">{{ news.ent_headlines }}</h5>
+        <p class="card-text">{{ news.ent_content }}</p>
+      </div>
     </div>
-</div>
-{% endfor %}
+  {% endfor %} 
+{% else %}
+  {% for news in ent_news_one %}
+    <h2>{{ news.ent_name }}</h2>
+    <div class="card m-2" style="width: 350px; display: inline-block;">
+      <img class="card-img-top" src="{{ news.ent_image_url }}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{ news.ent_lead_text }}</h5>
+          {% for one_liner in ent_oneliners %}
+            {% if one_liner.ent_id_id == news.id %}
+              <p class="card-text">{{ news.ent_oneliners }}</p>
+            {% endif %}
+          {% endfor %} 
+
+        </div>
+    </div>
+  {% endfor %}
+{% endif %}
 {% endblock content %}

@@ -2,21 +2,23 @@
 
 {% block content %}
 
-    <div class="content-section text-center">
-        <strong>Headlines</strong>
-    </div>
+    {% if user.is_superuser %}
 
-    {% for news in latest_news %}
+        <form action="{% url 'headlines' %}">
 
-    <div class="card m-2" style="width: 350px; display: inline-block;">
-        <img class="card-img-top" src="{{ news.latest_image_url }}" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">{{ news.latest_headlines }}</h5>
-          <p class="card-text">{{ news.latest_content }}</p>
-        </div>
-    </div>
-    {% endfor %}
+            <input type="submit" value="NDTV" name="ndtv">
+            <input type="submit" value="ZEE" name="zee">
+            <input type="submit" value="Scroll" name="scroll">
+        </form>
+        
+        
+    {% else %}
+       {% for tag in tags_all %}
+            <button>
+                {{ tag.tags }}
+            </button>
 
- 
+        {% endfor %}
+    {% endif %}
 
 {% endblock content %}
