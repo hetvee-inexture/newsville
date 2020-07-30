@@ -81,10 +81,10 @@ WSGI_APPLICATION = 'newsville.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd4v4uejl95sqgs',
-        'USER': 'gypdghksynykyl',
-        'PASSWORD': '82378f6ba7f337ef321174152b45af6f6f927ec33f881ec42149980f14672eea',
-        'HOST': 'ec2-107-22-7-9.compute-1.amazonaws.com',
+        'NAME': 'd2eiv3nroeq098',
+        'USER': 'wwvgfsckfiepiv',
+        'PASSWORD': '4869cfe4dddac9f1fd6fb0ff8e3c0bd3985d0e568481b02519531e3474421998',
+        'HOST': 'ec2-54-159-138-67.compute-1.amazonaws.com',
         'PORT': 5432,
     }
 }

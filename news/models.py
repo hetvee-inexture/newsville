@@ -78,4 +78,7 @@ class Tags(models.Model):
     ]
 
     tags = models.CharField(max_length=100,choices=tags)
+
+class NewsTags(models.Model):
+    tag_id = models.ForeignKey(Tags, on_delete=models.CASCADE)
     news_id = models.IntegerField()
