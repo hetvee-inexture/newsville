@@ -1,7 +1,5 @@
 from django.urls import path, include
-from .views import (headlines, state_news, 
-                    country_news, world_news, 
-                    cricket_news,ent_news,headlines_search,home)
+from .views import *
 
 urlpatterns = [
     path('', home,name='home'),

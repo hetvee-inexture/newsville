@@ -13,7 +13,7 @@ def home(request):
 	return render(request, 'news/home.html', context)
 
 def ndtv_news(request):
-	latest_news_obj = NdtvNews.bjects.all()
+	latest_news_obj = NdtvNews.objects.all()
 
 	if request.user.is_superuser:
 		form = NewsTagForm()
@@ -31,15 +31,33 @@ def ndtv_news(request):
 			'latest_news' : latest_news_obj,
 			'form' : form
 		}
-		return render(request, 'news/ndtv_news.html', context')
+		return render(request, 'news/ndtv_news.html', context)
 	else:
+
+		latest_news_obj = NdtvNews.objects.all()
+		tags = Tags.objects.all()
+		news_tags = NewsTag.objects.all()
 		context = {
-			'latest_news' : latest_news_obj
+			'latest_news' : latest_news_obj,
+			'tags' : tags,
+			'ids' :news_tags
 		}
 		return render(request, 'news/ndtv_news.html', context)
 
 def zee_news(request):
-	pass
+	# news_obj = ZeeNews.objects.all()
+	# if request.user.is_superuser:
+	# 	form = NewsTagForm()
+
+	# 	if request.method == 'POST':
+	# 		form = NewsTagForm(request.POST)
+	# 		if form.is_valid():
+	# 			tag = form.save(commit=False)
+	# 			tag.news_id = request.POST.get('news_id')
+	# 			tag.save()
+	# 			return redirect(/'')
+
+	if request
 
 def scroll_news(request):
 	pass
