@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from news.models import *
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from news.forms import TagForm
+from news.forms import TagForm, NewsTagForm
 
 def home(request):
 	
@@ -12,42 +12,50 @@ def home(request):
 
 	return render(request, 'news/home.html', context)
 
-def headlines(request):
+def ndtv_news(request):
+	latest_news_obj = NdtvNews.bjects.all()
+
+	if request.user.is_superuser:
+		form = NewsTagForm()
+
+		if request.method == 'POST':
+			form = NewsTagForm(request.POST)
+			if form.is_valid():
+				tag = form.save(commit=False)
+				tag.news_id = request.POST.get('news_id')
+				tag.save()
+
+				return redirect('/ndtv-news')
+		
+		context = {
+			'latest_news' : latest_news_obj,
+			'form' : form
+		}
+		return render(request, 'news/ndtv_news.html', context')
+	else:
+		context = {
+			'latest_news' : latest_news_obj
+		}
+		return render(request, 'news/ndtv_news.html', context)
+
+def zee_news(request):
+	pass
+
+def scroll_news(request):
+	pass
+
+def add_tag(request):
 	form = TagForm()
 	if request.method == 'POST':
 		form = TagForm(request.POST)
 
 		if form.is_valid():
-			tag = form.save(commit=False)
-			tag.news_id = request.POST.get('news_id')
-			tag.save()
-
-	if request.GET.get('ndtv'):
-		latest_news_obj = NdtvNews.objects.all()
-
-		context = {
-			'latest_news': latest_news_obj,
-			'form' : form
-		}
-		
-
-		return render(request, 'news/headlines.html',context)
-
-
-	elif request.GET.get('zee'):
-
-		context = {
-			'latest_news': ZeeLatestNews.objects.all(),
-			'latest_obj' : ZeeNews.objects.all()        
-		}
-
-	else:
-		context = {
-			'latest_news': ScrollLatestNews.objects.all(),
-			'latest_obj' : ScrollNews.objects.all()
-		}
-	
-	return render(request, 'news/headlines.html',context)
+			form.save()
+			return redirect('/')
+	context = {
+		'form': form
+	}
+	return render(request, 'news/add_tag.html', context)
 	 
 @login_required
 def country_news(request):
