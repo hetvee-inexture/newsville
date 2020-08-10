@@ -4,10 +4,12 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from news.forms import TagForm, NewsTagForm
 
+@login_required
 def home(request):
 
 	return render(request, 'news/home.html')
 
+@login_required
 def ndtv_news(request):
 	latest_news_obj = NdtvNews.objects.all()
 
@@ -39,7 +41,8 @@ def ndtv_news(request):
 			'ids' :news_tags
 		}
 		return render(request, 'news/ndtv_news.html', context)
-
+		
+@login_required
 def zee_news(request):
 	news_obj = ZeeNews.objects.all()
 
