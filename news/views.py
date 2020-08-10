@@ -5,12 +5,8 @@ from django.db.models import Q
 from news.forms import TagForm, NewsTagForm
 
 def home(request):
-	
-	context = {
-		'tags_all' : Tags.objects.all()
-	}
 
-	return render(request, 'news/home.html', context)
+	return render(request, 'news/home.html')
 
 def ndtv_news(request):
 	latest_news_obj = NdtvNews.objects.all()
@@ -117,91 +113,7 @@ def add_tag(request):
 		'form': form
 	}
 	return render(request, 'news/add_tag.html', context)
-	 
-@login_required
-def country_news(request):
-
-	if request.GET.get('ndtv'):
-
-		context = {
-			'country_news': NdtvCountryNews.objects.all()
-		}
-
-	elif request.GET.get('zee'):
-		
-		context = {
-			'country_news': CountryNews.objects.all()
-		}
-
-	else: 
-		context = {
-			'country_news': ScrollCountryNews.objects.all()
-		}
-
-	
-
-@login_required
-def cricket_news(request):
-
-	if request.GET.get('ndtv'):    
-		context = {
-			'cricket_news': NdtvCricketNews.objects.all()
-		}
-
-	elif request.GET.get('zee'):
-		context = {
-			'cricket_news': CricketNews.objects.all()
-		}
-
-	else:
-		context = {
-			'cricket_news': ScrollCricketNews.objects.all()
-		}
-
-	return render(request, 'news/sports_news.html',context)
-
-@login_required
-def world_news(request):
-
-	if request.GET.get('ndtv'):
-		context = {
-			'world_news': NdtvWorldNews.objects.all()
-		}
-		
-	elif request.GET.get('zee'):
-		context = {
-			'world_news': WorldNews.objects.all()
-		}
-
-	else:
-		context = {
-			'world_news': ScrollWorldNews.objects.all()
-		}
-
-	return render(request, 'news/world_news.html',context)  
-
-@login_required
-def state_news(request):
-
-	if request.GET.get('zee'):
-
-		context = {
-			'state_news': StateNews.objects.all(),
-			'state_oneliners': StateOneliners.objects.all()
-		}
-
-	elif request.GET.get('ndtv'):
-		context = {
-			'city': True,
-			'city_news': NdtvCityNews.objects.all()
-		}
-	else:
-		context = {
-			'city': True,
-			'city_news' : ScrollCityNews.objects.all()
-		}    
-	return render(request, 'news/state_news.html',context)
-	
+	  
 
 @login_required
 def ent_news(request):
