@@ -2,23 +2,11 @@
 
 {% block content %}
 
-    {% if user.is_superuser %}
-
-        <form action="{% url 'headlines' %}">
-
-            <input type="submit" value="NDTV" name="ndtv">
-            <input type="submit" value="ZEE" name="zee">
-            <input type="submit" value="Scroll" name="scroll">
-        </form>
-        
-        
-    {% else %}
-       {% for tag in tags_all %}
-            <button>
-                {{ tag.tags }}
-            </button>
-
-        {% endfor %}
-    {% endif %}
+<a href="{% url 'ndtv-news' %}">NDTV</a>
+<a href="{% url 'zee-news' %}">ZEE</a>
+<a href="{% url 'scroll-news' %}">Scroll</a>
+{% if user.is_superuser %}
+    <a href="{% url 'add-tag' %}" class="btn">Add Tag</a>
+{% endif %}
 
 {% endblock content %}

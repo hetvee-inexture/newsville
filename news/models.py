@@ -66,19 +66,11 @@ class ZeeWorldNews(models.Model):
     news_id = models.ForeignKey(ZeeNews, on_delete=models.CASCADE)
 
 class Tags(models.Model):
+    tags = models.CharField(max_length=50)
 
-    tags = [
-        ('trending','Trending'),
-        ('latest', 'Latest'),
-        ('cricket', 'Cricket'),
-        ('entertaining', 'Entertaining'),
-        ('rip', 'RIP'),
-        ('india', 'India'),
-        ('city', 'City')
-    ]
+    def __str__(self):
+        return self.tags
 
-    tags = models.CharField(max_length=100,choices=tags)
-
-class NewsTags(models.Model):
+class NewsTag(models.Model):
     tag_id = models.ForeignKey(Tags, on_delete=models.CASCADE)
     news_id = models.IntegerField()
