@@ -81,10 +81,10 @@ WSGI_APPLICATION = 'newsville.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd4v4uejl95sqgs',
-        'USER': 'gypdghksynykyl',
-        'PASSWORD': '82378f6ba7f337ef321174152b45af6f6f927ec33f881ec42149980f14672eea',
-        'HOST': 'ec2-107-22-7-9.compute-1.amazonaws.com',
+        'NAME': 'd553hnsega0h7b',
+        'USER': 'daveoyhabwryec',
+        'PASSWORD': 'e5afd2c2508d329e050c2a10dd8f8837ff5effecc38b9cbb3bae5f99f90f0bc7',
+        'HOST': 'ec2-18-214-119-135.compute-1.amazonaws.com',
         'PORT': 5432,
     }
 }
@@ -131,7 +131,7 @@ STATIC_URL = '/static/'
 
 CRSIPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGIN_REDIRECT_URL = 'headlines'
+LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'login'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')

@@ -1,88 +1,116 @@
 from django.shortcuts import render,redirect
-from news.models import (LatestNews,CountryNews,
-                        CricketNews, WorldNews, 
-                        StateNews, StateOneliners,
-                        EntNews,EntOneliners)
+from news.models import *
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from news.forms import TagForm, NewsTagForm
 
+def home(request):
 
-def headlines(request):
+	return render(request, 'news/home.html')
 
-    context = {
-        'latest_news': LatestNews.objects.all()
-    }
-    return render(request, 'news/headlines.html',context)
+def ndtv_news(request):
+	latest_news_obj = NdtvNews.objects.all()
 
-@login_required
-def content(request):
-    context = {
-        'latest_news': LatestNews.objects.all()
-    }
+	if request.user.is_superuser:
+		form = NewsTagForm()
 
-    return render(request, 'news/home.html',context)
+		if request.method == 'POST':
+			form = NewsTagForm(request.POST)
+			if form.is_valid():
+				tag = form.save(commit=False)
+				tag.news_id = request.POST.get('news_id')
+				tag.save()
 
-    
-@login_required
-def country_news(request):
+				return redirect('/ndtv-news')
+		
+		context = {
+			'latest_news' : latest_news_obj,
+			'form' : form
+		}
+		return render(request, 'news/ndtv_news.html', context)
+	else:
 
-    context = {
-        'country_news': CountryNews.objects.all()
-    }
+		latest_news_obj = NdtvNews.objects.all()
+		tags = Tags.objects.all()
+		news_tags = NewsTag.objects.all()
+		context = {
+			'latest_news' : latest_news_obj,
+			'tags' : tags,
+			'ids' :news_tags
+		}
+		return render(request, 'news/ndtv_news.html', context)
 
-    return render(request, 'news/country_news.html',context)
+def zee_news(request):
+	news_obj = ZeeNews.objects.all()
 
-@login_required
-def cricket_news(request):
+	if request.user.is_superuser:
+		form = NewsTagForm()
 
-    context = {
-        'cricket_news': CricketNews.objects.all()
-    }
+		if request.method == 'POST':
+			form = NewsTagForm(request.POST)
+			if form.is_valid():
+				tag = form.save(commit=False)
+				tag.news_id = request.POST.get('news_id')
+				tag.save()
+				return redirect('/zee-news')
+		
+		context = {
+			'latest_news' : news_obj,
+			'form' : form
+		}
+		return render(request, 'news/zee_news.html', context)
 
-    return render(request, 'news/sports_news.html',context)
+	else:
+		tags = Tags.objects.all()
+		news_tags = NewsTag.objects.all()
+		context = {
+			'latest_news': news_obj,
+			'tags': tags,
+			'ids': news_tags
+		}
+		return render(request, 'news/zee_news.html', context)
 
-@login_required
-def world_news(request):
+def scroll_news(request):
 
-    context = {
-        'world_news': WorldNews.objects.all()
-    }
-     
-    return render(request, 'news/world_news.html',context)
+	news_obj = ScrollNews.objects.all()
 
-@login_required
-def state_news(request):
+	if request.user.is_superuser:
+		form = NewsTagForm()
 
-    context = {
-        'state_news': StateNews.objects.all(),
-        'state_oneliners': StateOneliners.objects.all()
-    }
-     
-    return render(request, 'news/state_news.html',context)
+		if request.method == 'POST':
+			form = NewsTagForm(request.POST)
+			if form.is_valid():
+				tag = form.save(commit=False)
+				tag.news_id = request.POST.get('news_id')
+				tag.save()
+				return redirect('/scroll-news')
+		
+		context = {
+			'latest_news' : news_obj,
+			'form' : form
+		}
+		return render(request, 'news/scroll_news.html', context)
 
-@login_required
-def ent_news(request):
+	else:
+		tags = Tags.objects.all()
+		news_tags = NewsTag.objects.all()
+		context = {
+			'latest_news': news_obj,
+			'tags': tags,
+			'ids': news_tags
+		}
+		return render(request, 'news/scroll_news.html', context)
 
-    context = {
-        'ent_news': EntNews.objects.all(),
-        'ent_oneliners': EntOneliners.objects.all()
-    } 
+def add_tag(request):
+	form = TagForm()
+	if request.method == 'POST':
+		form = TagForm(request.POST)
 
-    return render(request, 'news/ent_news.html',context)
-
-def headlines_search(request):
-    headlines = LatestNews.objects.all()
-    query = request.GET.get('q')
-    if query:
-        headlines = LatestNews.objects.filter(
-            Q(latest_headlines__search=query)
-        )
-
-    context = {
-        'search_filter': headlines
-    }
-
-
-    print(context)
-    return render(request, 'news/search.html',context)
-    
+		if form.is_valid():
+			form.save()
+			return redirect('/')
+	context = {
+		'form': form
+	}
+	return render(request, 'news/add_tag.html', context)
+	  

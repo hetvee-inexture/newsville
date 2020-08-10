@@ -2,78 +2,75 @@ from django.db import models
 import json
 from django.utils import timezone
 
-class CountryNews(models.Model):
+class NdtvNews(models.Model):
+    ndtv_headlines = models.TextField()
+    ndtv_content = models.TextField()
+    ndtv_img_url = models.TextField()
 
-    country_headlines = models.TextField()
-    country_content = models.TextField()
-    country_image_url = models.TextField()
-    date = models.DateTimeField(default=timezone.now, null=True)
+class NdtvLatestNews(models.Model):
+    news_id = models.ForeignKey(NdtvNews, on_delete=models.CASCADE)
 
+class NdtvWorldNews(models.Model):
+    news_id = models.ForeignKey(NdtvNews, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.country_headlines
+class NdtvCricketNews(models.Model):
+    news_id = models.ForeignKey(NdtvNews, on_delete=models.CASCADE)
 
-class CricketNews(models.Model):
+class NdtvCityNews(models.Model):
+    news_id = models.ForeignKey(NdtvNews, on_delete=models.CASCADE)
 
-    cricket_headlines = models.TextField()
-    cricket_content = models.TextField()
-    cricket_image_url = models.TextField()
-    date = models.DateTimeField(default=timezone.now, null=True)
+class NdtvEntNews(models.Model):
+    news_id = models.ForeignKey(NdtvNews, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.cricket_headlines
+class NdtvCountryNews(models.Model):
+    news_id = models.ForeignKey(NdtvNews, on_delete=models.CASCADE)
 
-class LatestNews(models.Model):
+class ScrollNews(models.Model):
+    scroll_headlines = models.TextField()
+    scroll_content = models.TextField()
+    scroll_img_url = models.TextField()
 
-    latest_headlines = models.TextField()
-    latest_content = models.TextField()
-    latest_image_url = models.TextField()
-    date = models.DateTimeField(default=timezone.now, null=True)
+class ScrollLatestNews(models.Model):
+    news_id = models.ForeignKey(ScrollNews, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.latest_headlines
+class ScrollWorldNews(models.Model):
+    news_id = models.ForeignKey(ScrollNews, on_delete=models.CASCADE)
 
-class WorldNews(models.Model):
+class ScrollCountryNews(models.Model):
+    news_id = models.ForeignKey(ScrollNews, on_delete=models.CASCADE)
 
-    world_headlines = models.TextField()
-    world_content = models.TextField()
-    world_image_url = models.TextField()
-    date = models.DateTimeField(default=timezone.now, null=True)
+class ScrollEntNews(models.Model):
+    news_id = models.ForeignKey(ScrollNews, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.world_headlines
+class ScrollCricketNews(models.Model):
+    news_id = models.ForeignKey(ScrollNews, on_delete=models.CASCADE)
 
+class ScrollCityNews(models.Model):
+    news_id = models.ForeignKey(ScrollNews, on_delete=models.CASCADE)
 
-class StateNews(models.Model):
+class ZeeNews(models.Model):
+    zee_headlines = models.TextField()
+    zee_content = models.TextField()
+    zee_img_url = models.TextField()
 
-    state_lead_text = models.TextField()
-    state_image_url = models.TextField()
-    state_name = models.TextField()
+class ZeeCountryNews(models.Model):
+    news_id = models.ForeignKey(ZeeNews, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.state_lead_text
+class ZeeCricketNews(models.Model):
+    news_id = models.ForeignKey(ZeeNews, on_delete=models.CASCADE)
 
-class StateOneliners(models.Model):
+class ZeeLatestNews(models.Model):
+    news_id = models.ForeignKey(ZeeNews, on_delete=models.CASCADE)
 
-    one_liners = models.TextField()
-    state_id = models.ForeignKey(StateNews,on_delete=models.CASCADE)
+class ZeeWorldNews(models.Model):
+    news_id = models.ForeignKey(ZeeNews, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.one_liners
-
-class EntNews(models.Model):
-    ent_lead_text = models.TextField()
-    ent_image_url = models.TextField()
-    ent_name = models.TextField()
-
-    def __str__(self):
-        return self.ent_lead_text
-
-class EntOneliners(models.Model):
-
-    one_liners = models.TextField()
-    ent_id = models.ForeignKey(EntNews,on_delete=models.CASCADE)
-
+class Tags(models.Model):
+    tags = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.one_liners
+        return self.tags
+
+class NewsTag(models.Model):
+    tag_id = models.ForeignKey(Tags, on_delete=models.CASCADE)
+    news_id = models.IntegerField()
