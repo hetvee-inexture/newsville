@@ -36,27 +36,9 @@
 		        <div class="navbar-nav mr-auto">
 				 {% if user.is_authenticated %}
 					 <a class="nav-item nav-link" href="{% url 'home' %}">Home</a>
-					 <a class="nav-item nav-link" href="{% url 'state-news' %}">State</a>
-					 <a class="nav-item nav-link" href="{% url 'country-news' %}">Country</a>
-					 <a class="nav-item nav-link" href="{% url 'world-news' %}">World</a>
-					 <a class="nav-item nav-link" href="{% url 'sports-news' %}">Cricket</a>
-					 <a class="nav-item nav-link" href="{% url 'ent-news' %}">Entertainment</a>
 				 {% else %}
 				    <a class="nav-item nav-link" href="{% url 'home' %}">Home</a>
-					<a class="nav-item nav-link" href="{% url 'state-news' %}">State</a>
-					<a class="nav-item nav-link" href="{% url 'country-news' %}">Country</a>
-					<a class="nav-item nav-link" href="{% url 'world-news' %}">World</a>
-					<a class="nav-item nav-link" href="{% url 'sports-news' %}">Cricket</a>
-					<a class="nav-item nav-link" href="{% url 'ent-news' %}">Entertainment</a>
 				{% endif %}
-				</div>
-				<div class="navbar-nav mr-auto">
-					<ul class="navbar-nav mr-auto">
-						<form class="form-inline my-2 my-lg-0" action="{% url 'search' %}">
-							<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
-							<button class="btn btn-outline-success my-2 my-sm-2" type="submit">Search</button>
-						</form>
-					</ul>
 				</div>
 		        <!-- Navbar Right Side -->
 		        <div class="navbar-nav">
