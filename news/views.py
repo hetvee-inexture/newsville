@@ -72,7 +72,7 @@ def zee_news(request):
 			'ids': news_tags
 		}
 		return render(request, 'news/zee_news.html', context)
-
+@login_required
 def scroll_news(request):
 
 	news_obj = ScrollNews.objects.all()
