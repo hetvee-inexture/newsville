@@ -10,14 +10,28 @@
                 <hr>
                 </div>
                 {% if user.is_superuser %}
-                    <form method="POST" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <input type="hidden" value="{{ news.id }}" name="news_id">
-                        <fieldset class="form-group">
-                            {{form|crispy}}
-                        </fieldset>
-                        <button class="btn">Add Tag</button>
-                    </form>
+                    <div class="container">
+                        <div class="col-md-6">
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{ news.id }}" name="news_id">
+                                <fieldset class="form-group">
+                                    {{form|crispy}}
+                                </fieldset>
+                                <button class="btn">Add Tag</button>
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <input type="hidden" name="news_id" value="{{ news.id }}">
+                                <fieldset class="form-group">
+                                    {{headline_form|crispy}}
+                                </fieldset>
+                                <button class="btn">Add Headline</button>
+                            </form>
+                        </div>
+                    </div>
                 {% else %}
                     {% for id in ids %}
                         {% if news.id == id.news_id %}

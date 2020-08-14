@@ -2,19 +2,31 @@ from django.shortcuts import render,redirect
 from news.models import *
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from news.forms import TagForm, NewsTagForm
+from news.forms import TagForm, NewsTagForm, HeadlinesForm, NewsHeadlinesForm
 
+#home page for all users
 @login_required
 def home(request):
+	if request.user.is_superuser:
 
-	return render(request, 'news/home.html')
+		return render(request, 'news/home.html')
+	else:
 
+		context = {
+			'headlines': Headlines.objects.all()
+		}
+		
+
+		return render(request, 'news/home.html',context)
+
+#ndtv news page
 @login_required
 def ndtv_news(request):
 	latest_news_obj = NdtvNews.objects.all()
 
 	if request.user.is_superuser:
 		form = NewsTagForm()
+		headline_form = NewsHeadlinesForm()
 
 		if request.method == 'POST':
 			form = NewsTagForm(request.POST)
@@ -23,11 +35,19 @@ def ndtv_news(request):
 				tag.news_id = request.POST.get('news_id')
 				tag.save()
 
-				return redirect('/ndtv-news')
+			headline_form = NewsHeadlinesForm(request.POST)
+			if headline_form.is_valid():
+				headline = headline_form.save(commit=False)
+				headline.news_id = request.POST.get('news_id')
+				headline.save()
+
+			return redirect('/ndtv-news')
+		
 		
 		context = {
 			'latest_news' : latest_news_obj,
-			'form' : form
+			'form' : form,
+			'headline_form' : headline_form
 		}
 		return render(request, 'news/ndtv_news.html', context)
 	else:
@@ -42,6 +62,7 @@ def ndtv_news(request):
 		}
 		return render(request, 'news/ndtv_news.html', context)
 		
+#zee news page		
 @login_required
 def zee_news(request):
 	news_obj = ZeeNews.objects.all()
@@ -72,6 +93,8 @@ def zee_news(request):
 			'ids': news_tags
 		}
 		return render(request, 'news/zee_news.html', context)
+
+#scroll news page
 @login_required
 def scroll_news(request):
 
@@ -103,7 +126,8 @@ def scroll_news(request):
 			'ids': news_tags
 		}
 		return render(request, 'news/scroll_news.html', context)
-
+		
+# function for adding tags
 def add_tag(request):
 	form = TagForm()
 	if request.method == 'POST':
@@ -116,4 +140,20 @@ def add_tag(request):
 		'form': form
 	}
 	return render(request, 'news/add_tag.html', context)
+
+def add_headline(request):
+
+	form = HeadlinesForm()
+	if request.method == 'POST':
+		form = HeadlinesForm(request.POST)
+
+		if form.is_valid():
+			form.save()
+			return redirect('/')
+
+	context = {
+		'form': form
+	}
+	return render(request, 'news/add_headline.html', context)
+	
 	  

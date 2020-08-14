@@ -2,6 +2,7 @@ from django.db import models
 import json
 from django.utils import timezone
 
+# news models
 class NdtvNews(models.Model):
     ndtv_headlines = models.TextField()
     ndtv_content = models.TextField()
@@ -65,6 +66,7 @@ class ZeeLatestNews(models.Model):
 class ZeeWorldNews(models.Model):
     news_id = models.ForeignKey(ZeeNews, on_delete=models.CASCADE)
 
+#Tags models and relations
 class Tags(models.Model):
     tags = models.CharField(max_length=50)
 
@@ -72,5 +74,16 @@ class Tags(models.Model):
         return self.tags
 
 class NewsTag(models.Model):
-    tag_id = models.ForeignKey(Tags, on_delete=models.CASCADE)
+    tag_id = models.ForeignKey(Tags, on_delete=models.CASCADE, blank=True, null=True)
+    news_id = models.IntegerField(null=True)
+
+class Headlines(models.Model):
+    headlines = models.TextField()
+
+    def  __str__(self):
+        return self.headlines
+
+class NewsHeadlines(models.Model):
+    headlines_id = models.ForeignKey(Headlines, on_delete=models.CASCADE)
     news_id = models.IntegerField()
+

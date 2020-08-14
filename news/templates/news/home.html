@@ -2,11 +2,19 @@
 
 {% block content %}
 
-<a href="{% url 'ndtv-news' %}">NDTV</a>
-<a href="{% url 'zee-news' %}">ZEE</a>
-<a href="{% url 'scroll-news' %}">Scroll</a>
 {% if user.is_superuser %}
+    <a href="{% url 'ndtv-news' %}">NDTV</a>
+    <a href="{% url 'zee-news' %}">ZEE</a>
+    <a href="{% url 'scroll-news' %}">Scroll</a>
     <a href="{% url 'add-tag' %}" class="btn">Add Tag</a>
+    <a href="{% url 'add-headline' %}" class="btn">Add Headline</a>
+
+{% else %}
+    {% for headline in headlines %}
+        <form action="{% url 'news-display' %}">
+            <button type="submit"></button>
+        </form>
+    {% endfor %}
 {% endif %}
 
 {% endblock content %}

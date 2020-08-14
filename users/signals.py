@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.dispatch import receiver 
 from .models import Profile
 
-
+# Signal function that creates a profile for each user
 @receiver(post_save,sender = User)
 def create_profile(sender,instance,created,**kwargs):
 	if created:
