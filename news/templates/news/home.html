@@ -12,7 +12,9 @@
 {% else %}
     {% for headline in headlines %}
         <form action="{% url 'news-display' %}">
-            <button type="submit"></button>
+            <div class="article-metadata">
+                <button type="submit" name="admin_headline" value="{{ headline }}">{{ headline }}</button>
+            </div>
         </form>
     {% endfor %}
 {% endif %}

@@ -69,6 +69,7 @@ def zee_news(request):
 
 	if request.user.is_superuser:
 		form = NewsTagForm()
+		headline_form = NewsHeadlinesForm()
 
 		if request.method == 'POST':
 			form = NewsTagForm(request.POST)
@@ -76,11 +77,19 @@ def zee_news(request):
 				tag = form.save(commit=False)
 				tag.news_id = request.POST.get('news_id')
 				tag.save()
-				return redirect('/zee-news')
+
+			headline_form = NewsHeadlinesForm(request.POST)
+			if headline_form.is_valid():
+				headline = headline_form.save(commit=False)
+				headline.news_id = request.POST.get('news_id')
+				headline.save()
+
+			return redirect('/zee-news')
 		
 		context = {
 			'latest_news' : news_obj,
-			'form' : form
+			'form' : form,
+			'headline_form' : headline_form
 		}
 		return render(request, 'news/zee_news.html', context)
 
@@ -155,5 +164,18 @@ def add_headline(request):
 		'form': form
 	}
 	return render(request, 'news/add_headline.html', context)
-	
-	  
+
+def news_display(request):
+	admin_headline = request.GET.get('admin_headline')
+	headline = Headlines.objects.filter(headlines=admin_headline)
+	news_headlines = NewsHeadlines.objects.filter(headlines_id=headline[0].id)
+	news_tags = NewsTag.objects.filter(news_id=news_headlines[0].news_id)
+	context = {
+		'news_tags': news_tags,
+		'tags': Tags.objects.all(),
+		'news_headlines':news_headlines,
+		'ndtv_obj': NdtvNews.objects.all()
+	}
+	return render(request, 'news/news_display.html',context)
+
+
