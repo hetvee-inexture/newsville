@@ -106,11 +106,11 @@ def zee_news(request):
 #scroll news page
 @login_required
 def scroll_news(request):
-
 	news_obj = ScrollNews.objects.all()
 
 	if request.user.is_superuser:
 		form = NewsTagForm()
+		headline_form = NewsHeadlinesForm()
 
 		if request.method == 'POST':
 			form = NewsTagForm(request.POST)
@@ -118,11 +118,19 @@ def scroll_news(request):
 				tag = form.save(commit=False)
 				tag.news_id = request.POST.get('news_id')
 				tag.save()
-				return redirect('/scroll-news')
+
+			headline_form = NewsHeadlinesForm(request.POST)
+			if headline_form.is_valid():
+				headline = headline_form.save(commit=False)
+				headline.news_id = request.POST.get('news_id')
+				headline.save()
+
+			return redirect('/scroll-news')
 		
 		context = {
 			'latest_news' : news_obj,
-			'form' : form
+			'form' : form,
+			'headline_form': headline_form
 		}
 		return render(request, 'news/scroll_news.html', context)
 
@@ -175,7 +183,8 @@ def news_display(request):
 		'tags': Tags.objects.all(),
 		'news_headlines':news_headlines,
 		'ndtv_obj': NdtvNews.objects.all(),
-		'zee_news': ZeeNews.objects.all()
+		'zee_news': ZeeNews.objects.all(),
+		'scroll_news': ScrollNews.objects.all()
 	}
 	return render(request, 'news/news_display.html',context)
 
