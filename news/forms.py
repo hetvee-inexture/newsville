@@ -15,7 +15,7 @@ class NewsTagForm(forms.ModelForm):
 class HeadlinesForm(forms.ModelForm):
     class Meta:
         model = Headlines
-        fields = ['headlines']
+        fields = ['headlines', 'image', 'description']
 
 class NewsHeadlinesForm(forms.ModelForm):
     class Meta:

@@ -160,13 +160,14 @@ def add_tag(request):
 
 def add_headline(request):
 
-	form = HeadlinesForm()
 	if request.method == 'POST':
-		form = HeadlinesForm(request.POST)
+		form = HeadlinesForm(request.POST, request.FILES)
 
 		if form.is_valid():
 			form.save()
 			return redirect('/')
+	else:
+		form = HeadlinesForm()
 
 	context = {
 		'form': form
