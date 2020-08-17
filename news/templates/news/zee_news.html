@@ -26,16 +26,6 @@
                 </fieldset>
                 <button class="btn">Add Headline</button>
             </form>
-        {% else %}
-            {% for id in ids %}
-                {% if news.id == id.news_id %}
-                    {% for tag in tags %}
-                        {% if tag.id == id.tag_id_id %}
-                            {{ tag }}
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
-            {% endfor%}
         {% endif %}
     </div>
 {% endfor %}

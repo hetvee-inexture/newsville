@@ -78,10 +78,13 @@ class NewsTag(models.Model):
     news_id = models.IntegerField()
 
 class Headlines(models.Model):
-    headlines = models.TextField()
+    headlines = models.CharField(max_length=200)
+    image = models.ImageField(default='default.jpg',upload_to='headline_image')
+    description = models.TextField()
 
     def  __str__(self):
         return self.headlines
+    
 
 class NewsHeadlines(models.Model):
     headlines_id = models.ForeignKey(Headlines, on_delete=models.CASCADE)

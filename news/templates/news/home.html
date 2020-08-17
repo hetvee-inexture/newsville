@@ -12,8 +12,14 @@
 {% else %}
     {% for headline in headlines %}
         <form action="{% url 'news-display' %}">
-            <div class="article-metadata">
-                <button type="submit" name="admin_headline" value="{{ headline }}">{{ headline }}</button>
+            <div class="card m-2" style="width: 350px; display: inline-block;">
+                <img class="card-img-top" src="{{ headline.image.url }}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <button type="submit" name="admin_headline" value="{{ headline }}">{{ headline }}</button>
+                    </h5>
+                    <p class="card-content">{{ headline.description }}</p>     
+                </div>
             </div>
         </form>
     {% endfor %}
