@@ -18,6 +18,14 @@
                 </fieldset>
                 <button class="btn">Add Tag</button>
             </form>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" name="news_id" value="{{ news.id }}">
+                <fieldset class="form-group">
+                    {{headline_form|crispy}}
+                </fieldset>
+                <button class="btn">Add Headline</button>
+            </form>
         {% else %}
             {% for id in ids %}
                 {% if news.id == id.news_id %}

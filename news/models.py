@@ -74,8 +74,8 @@ class Tags(models.Model):
         return self.tags
 
 class NewsTag(models.Model):
-    tag_id = models.ForeignKey(Tags, on_delete=models.CASCADE, blank=True, null=True)
-    news_id = models.IntegerField(null=True)
+    tag_id = models.ForeignKey(Tags, on_delete=models.CASCADE)
+    news_id = models.IntegerField()
 
 class Headlines(models.Model):
     headlines = models.TextField()

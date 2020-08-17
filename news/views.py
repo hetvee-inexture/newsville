@@ -169,12 +169,13 @@ def news_display(request):
 	admin_headline = request.GET.get('admin_headline')
 	headline = Headlines.objects.filter(headlines=admin_headline)
 	news_headlines = NewsHeadlines.objects.filter(headlines_id=headline[0].id)
-	news_tags = NewsTag.objects.filter(news_id=news_headlines[0].news_id)
+	news_tags = NewsTag.objects.all()
 	context = {
 		'news_tags': news_tags,
 		'tags': Tags.objects.all(),
 		'news_headlines':news_headlines,
-		'ndtv_obj': NdtvNews.objects.all()
+		'ndtv_obj': NdtvNews.objects.all(),
+		'zee_news': ZeeNews.objects.all()
 	}
 	return render(request, 'news/news_display.html',context)
 
