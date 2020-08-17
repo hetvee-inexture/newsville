@@ -1,0 +1,74 @@
+{% extends "users/base.html" %}
+{% block content %}
+    {% for news in ndtv_obj %}
+        {% for obj in news_headlines %}
+            {% if news.id ==  obj.news_id%}
+                <div class="card m-2" style="width: 350px; display: inline-block;">
+                    <img class="card-img-top" src="{{ news.ndtv_img_url }}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ news.ndtv_headlines }}</h5>
+                        <p class="card-content">{{ news.ndtv_content}}</p>
+                        <hr>
+                    </div>
+                    {% for tag in tags %}
+                        {% for obj in news_tags %}
+                            {% if obj.news_id == news.id %}
+                                {% if obj.tag_id_id == tag.id %}
+                                    {{ tag }}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+
+    {% for news in zee_news %}
+        {% for obj in news_headlines %}
+            {% if news.id == obj.news_id %}
+                <div class="card m-2" style="width: 350px; display: inline-block;">
+                    <img class="card-img-top" src="{{ news.zee_img_url }}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ news.zee_headlines }}</h5>
+                        <p class="card-content">{{ news.zee_content}}</p>
+                        <hr>
+                    </div>
+                    {% for tag in tags %}
+                        {% for obj in news_tags %}
+                            {% if obj.news_id == news.id %}
+                                {% if obj.tag_id_id == tag.id %}
+                                    {{ tag }}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+
+    {% for news in scroll_news %}
+        {% for obj in news_headlines %}
+            {% if news.id == obj.news_id %}
+                <div class="card m-2" style="width: 350px; display: inline-block;">
+                    <img class="card-img-top" src="{{ news.scroll_img_url }}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ news.scroll_headlines }}</h5>
+                        <p class="card-content">{{ news.scroll_content}}</p>
+                        <hr>
+                    </div>
+                    {% for tag in tags %}
+                        {% for obj in news_tags %}
+                            {% if obj.news_id == news.id %}
+                                {% if obj.tag_id_id == tag.id %}
+                                    {{ tag }}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+{% endblock content %}
