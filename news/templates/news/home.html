@@ -11,7 +11,7 @@
 
 {% else %}
     {% for headline in headlines %}
-        <form action="{% url 'news-display' %}">
+        <form action="{% url 'news-display' %}" style="display: inline-block;">
             <div class="card m-2" style="width: 350px; display: inline-block;">
                 <img class="card-img-top" src="{{ headline.image.url }}" alt="Card image cap">
                 <div class="card-body">
